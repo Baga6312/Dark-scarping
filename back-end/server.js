@@ -8,7 +8,7 @@ const PORT = process.env.port
 app.use(cors())
 app.get('/command' , async (req , res)=> { 
     const data = req.query.data 
-    const drama = await exec(`echo $USER` , (stderr , stdout ,err ) => { 
+    const drama = exec(`echo $USER` , (stderr , stdout ,err ) => { 
         if (stderr) { 
             console.log(stderr)
         }

@@ -18,8 +18,7 @@ function  FormData () {
             <p>insert ur email bitch</p>
             <input type="text" onChange={(e)=> {setData(e.target.value)}}/><br/><br/>
             <input type="submit" value="search"  />
-            {!userData ? <p>u r good fam fr</p>: <p>uve been doxed by the skibidi council </p>}
-
+            {!userData ? <p>u r good fam fr</p>: <p>uve been doxed by the skibidi council {userData}</p>}
        </div>
     </form>
   </div>
