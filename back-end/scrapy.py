@@ -1,4 +1,4 @@
-import requests
+import requests_tor
 from bs4 import BeautifulSoup
 from io import StringIO
 import json
