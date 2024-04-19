@@ -1,4 +1,4 @@
-import requests_tor
+from requests_tor import * 
 from bs4 import BeautifulSoup
 from io import StringIO
 import json
@@ -12,7 +12,7 @@ class GitHubScraper:
     def search_github(self, keyword):
         api = "https://api.github.com/search/repositories?q=" + keyword
         headers = {"Accept": "application/vnd.github.v3+json"}
-        leak_response = requests.get(api, headers=headers)
+        leak_response = requestsTor.get(api, headers=headers)
         if leak_response.status_code == 200:
             data = json.loads(leak_response.text)
             for item in data.get("items", []):
