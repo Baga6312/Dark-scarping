@@ -45,7 +45,7 @@ class GitHubScraper:
                     self.scrape(item['url'], keyword)
 
 
-if _name_ == "_main_":
+if "_name_" == "_main_":
     scraper = GitHubScraper()
     keyword = input("Enter topic to scrap: ")
     scraper.search_github(keyword)
