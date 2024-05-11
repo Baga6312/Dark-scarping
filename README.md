@@ -1,6 +1,6 @@
 # Dark Scraping 
 
-A simple web Scrapping application for scrapping the dark web for breached credential 
+### A simple web Scrapping application for scrapping the dark web for breached credential 
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@ A simple web Scrapping application for scrapping the dark web for breached crede
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed:
+### Before you begin, ensure you have the following installed:
 
 - [Node.js](https://nodejs.org/)
 - [Tor](https://www.torproject.org/)
@@ -25,16 +25,16 @@ Before you begin, ensure you have the following installed:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Baga6312/dark-scarping 
+git clone https://github.com/Baga6312/dark-scarping ~./DarkScrapping 
 ```
 
 ## Usage
 
-For setting up everything and running the server with
-
+### For setting up everything and running the server with
+ 
 ```
 npm run dev
 ```
 
-and wait a moment 
+### and wait a moment 
 
