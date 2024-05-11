@@ -1,5 +1,4 @@
 import FormData from  './components/FormData'
-import './App.css'
 
 function App() {
 

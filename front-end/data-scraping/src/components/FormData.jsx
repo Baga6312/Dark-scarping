@@ -1,26 +1,18 @@
-import {useEffect, useState} from 'react'
-import Service from '../components/service'
-
+import '..\\assets\\styel_home.css'
 function  FormData () {
-  const [data, setData ] = useState('')
-  const [userData , setUserData] = useState('')
-  const serv = Service()
 
-  const handleSubmit=async (e , data) => { 
-      e.preventDefault()
-      const dululu =await  serv.searchForData()
-      setUserData(dululu.message)
-  }
   return (
-  <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-            <p>insert ur email bitch</p>
-            <input type="text" onChange={(e)=> {setData(e.target.value)}}/><br/><br/>
-            <input type="submit" value="search"  />
-            {!userData ? <p>u r good fam fr</p>: <p>uve been doxed by the skibidi council {userData}</p>}
-       </div>
-    </form>
+    <div id="body">
+    <div id="container">
+    <div id="logo">
+		  <p >Dark Gate</p>
+        </div>
+        <div id="buttons">
+            <span><input className="signin-btn" type="button" value="sex"  /></span><br/><br/>
+            <span><input className="signup-btn" type="button" value="sex" /></span><br/><br/>
+            <span><input className="guest-btn" type="button" value="sex" /></span>
+        </div>
+  </div>
   </div>
   )
 }

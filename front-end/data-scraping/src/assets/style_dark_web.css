@@ -1,0 +1,122 @@
+#body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    background-color: orange;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    animation: fadeInImg 1s ease forwards ; 
+}
+
+#elems {
+    display: flex;
+    flex-direction: column; /* Stack child elements vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    margin: 100px; /* Removed the extra semicolon */
+}
+
+#site-label #site { 
+    
+    width: 230px;
+    margin: 5px;
+    margin-top :25px; 
+    height: 45px;
+    color: black;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    transition: .3s;
+}
+.dash { 
+    border-radius: 30px;
+    margin : 6px; 
+    margin-top: 10px;
+    text-align: center;
+    border: none;
+    background-color: white;
+    height: 35px;
+    width: 95%;
+
+}
+#elems     #topic , #keyword-label {
+    width: 20%;
+    margin: 5px;
+    margin-top :25px; 
+    height: 45px;
+    color: black;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    transition: .3s;
+}
+
+#elems #site  { 
+    cursor: pointer;
+}
+
+#keyword-label {
+    width: 20%;
+    background-color: white;
+    height: 45px;
+    border-radius: 30px;
+}
+
+#keyword-label #keyword {
+    border-radius: 30px;
+    margin-top: 4px;
+    text-align: center;
+    border: none;
+    background-color: white;
+    height: 35px;
+}
+
+#keyword-label #btn {
+    border-radius: 30px;
+    border: none;
+    list-style: none;
+    background-color: white;
+    cursor: pointer;
+    height: 90%;
+    width: 15%;
+}
+
+#keyword-label #btn:hover {
+    background-color: gray;
+    transition: ease-in-out .3s;
+}
+
+
+::placeholder {
+    text-align: center;
+ }
+
+
+
+
+@keyframes fadeInImg {
+    from  { 
+        opacity:  0 ; 
+        transform: translateY(-20px);
+    }to { 
+        opacity:  1 ;
+        transform: translateY(0px) ;
+    }
+}
+
+@keyframes fadeInBtns {
+    from { 
+        opacity :0;
+        transform:translateY(20px) ; 
+    }to { 
+        opacity:  1 ;
+        transform: translateY(0px) ;
+    }
+}

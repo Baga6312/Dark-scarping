@@ -36,7 +36,7 @@ def scrap_content(elem,keywords,logic= 'and') :
 					'url' : elem 
 					})
 			elif logic == 'or' :
-				if all(keyword.lower() in content.lower() for keyword in keywords) : 
+				if any(keyword.lower() in content.lower() for keyword in keywords) : 
 					results.append({
 					'logic' : logic ,
 					'url' : elem 
