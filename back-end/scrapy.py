@@ -1,56 +1,115 @@
-from requests_tor import * 
+from requests_tor import RequestsTor
 from bs4 import BeautifulSoup
-from io import StringIO
-import json
+import json 
+import threading
+import sys 
+keywords = []
+if sys.argv[2] not in ["and" , "or "] : 
+	keywords = sys.argv[2:]
+else : 
+	keywords = sys.argv[3:]
+ 
+Topic = sys.argv[1]
+
+nk = len(sys.argv[1:])
+logic = sys.argv[1]
+if nk > 1 :
+	while  not logic in ['and','or']:
+		logic = 'and'
+		if not logic in ['and' , 'or'] :
+			print("wrong input")
+else :
+	logic = "and"
+
+def scrap_content(elem,keywords,logic= 'and') :
+	results = []
+	try :
+		requests = RequestsTor(tor_ports=(9050,), tor_cport= 9051)
+		r = requests.get(elem)
+		if r.status_code == 200 :
+			content = r.text
+			if logic == 'and' :
+				if all(keyword.lower() in content.lower() for keyword in keywords) : 
+					
+					results.append({
+					'logic' : logic ,
+					'url' : elem 
+					})
+			elif logic == 'or' :
+				if all(keyword.lower() in content.lower() for keyword in keywords) : 
+					results.append({
+					'logic' : logic ,
+					'url' : elem 
+					})
+	except Exception as e :
+		pass
+	return results
+
+def scrap_site(url) :  
+	requests = RequestsTor(tor_ports=(9050,), tor_cport= 9051)
+	
+	r = requests.get(url)
+	
+	soup = BeautifulSoup(r.text, 'html.parser')
+	
+	  
+	sites_links = []
+	
+	links = soup.find_all('a', href = True)
+	All_links = [link['href'] for link in links if link['href']]
+	sites_links.append(All_links)
+	return sites_links
+	
+		
+def scrap_AHMIA(Topic,keywords) :
+	url = 'http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/search/?q=' + Topic
+	sites_links = scrap_site(url)
+	for http_links in sites_links :
+		for http_link in http_links :
+			if http_link.startswith('/') :
+				sites_links.append(http_link[(43 + len(Topic)):])
+	for final_link in sites_links :
+		results = scrap_content(final_link,keywords,logic=logic)
+		if results :
+			print("Ahmia " ,  results)
 
 
-class GitHubScraper:
-    def __init__(self):
-        self.github_api_token = 'ghp_GB5NPbxq5CNUrkFBd@RVUbSrdxLpZ02KSRtn'
-        self.urls = []
+def scrap_Company_Leaks(Topic,keywords) :
+	url = 'http://relateoak2hkvdty6ldp7x67hys7pzaeax3hwhidbqkjzva3223jpxqd.onion/' +  Topic + '/'
+	sites_links = scrap_site(url)
+	for elem in sites_links :
+		for e in elem :
+			e = ('http://relateoak2hkvdty6ldp7x67hys7pzaeax3hwhidbqkjzva3223jpxqd.onion' + e )
+			results = scrap_content(e,keywords,logic=logic)
+	if results :
+		print("RelateList" )
+	
 
-    def search_github(self, keyword):
-        api = "https://api.github.com/search/repositories?q=" + keyword
-        headers = {"Accept": "application/vnd.github.v3+json"}
-        leak_response = requestsTor.get(api, headers=headers)
-        if leak_response.status_code == 200:
-            data = json.loads(leak_response.text)
-            for item in data.get("items", []):
-                html_url = item.get("html_url")
-                if html_url:
-                    self.urls.append(html_url)
+def scrap_NOT_EVIL(Topic,keywords) :
+	url = 'http://notevilmtxf25uw7tskqxj6njlpebyrmlrerfv5hc4tuq7c7hilbyiqd.onion/index.php?q=' + Topic
+	sites_links = scrap_site(url)
+	for http_links in sites_links :
+		for http_link in http_links :
+			if http_link.startswith('/ch'):
+					sites_links.append(http_link[8:])
+			elif http_link.startswith('/co'):
+					sites_links.append(http_link[37:])
+	for elem in sites_links[10:15] :
+		results = scrap_content(elem,keywords,logic=logic)
+		if results :
+			print("NotEvil " , results) 
 
-    def url_transformer(self):
-        api_urls = []
-        for url in self.urls:
-            api_urls.append(f'https://api.github.com/repos/{url[19:]}/contents')
-        for api_url in api_urls:
-            print(api_url)
-
-    def scrape(self, link, keyword):
-        response = requests.get(link)
-        if response.status_code == 200:
-            data = response.json()
-            for item in data:
-                if item['type'] == 'file':
-                    file_content_response = requests.get(item['download_url'])
-                    if file_content_response.status_code == 200:
-                        html_content = file_content_response.text
-                        soup = BeautifulSoup(StringIO(html_content), 'html.parser')
-                        if keyword in html_content:
-                            print(f"Keyword '{keyword}' found in: {item['html_url']}")
-                        else:
-                            print("Nothing to be found in here")
-                elif item['type'] == 'dir':
-                    self.scrape(item['url'], keyword)
+thread1 = threading.Thread(target=scrap_Company_Leaks(Topic,keywords))
+thread2 = threading.Thread(target=scrap_NOT_EVIL(Topic,keywords))
+thread3 = threading.Thread(target=scrap_AHMIA(Topic,keywords))
 
 
-if "_name_" == "_main_":
-    scraper = GitHubScraper()
-    keyword = input("Enter topic to scrap: ")
-    scraper.search_github(keyword)
-    scraper.url_transformer()
-    keywords = input("Enter word or multiple keywords: ").split()
-    for link in scraper.urls:
-        for word in keywords:
-            scraper.scrape(link, word) 
+thread1.start()
+thread2.start()
+thread3.start()
+
+thread1.join()
+thread2.join()
+thread3.join()
+
+print("All functions executed.")
