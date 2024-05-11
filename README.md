@@ -6,7 +6,6 @@ A simple web Scrapping application for scrapping the dark web for breached crede
 
 - [Features](#features)
 - [Prerequisites](#prerequisites)
-- [Installation](#installation)
 - [Usage](#usage)
 
 ## Features
@@ -29,23 +28,9 @@ Before you begin, ensure you have the following installed:
 git clone https://github.com/Baga6312/dark-scarping 
 ```
 
-2. Install dependecies
-
-<h4>Install dependencies for root first </h4>
-
-```
-npm install
-```
-
-<h4>Install dependecies for every folders with </h4>
-
-```
-npm run set
-```
-
 ## Usage
 
-Start everything with
+For setting up everything and running the server with
 
 ```
 npm run dev
