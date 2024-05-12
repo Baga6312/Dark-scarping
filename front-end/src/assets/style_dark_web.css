@@ -128,3 +128,12 @@ padding-bottom: 50px;
         transform: translateY(0px) ;
     }
 }
+img { 
+    height : 130%; 
+    width: 100%;
+    opacity: 0.2 !important;
+    position: fixed;
+    top : -50px;
+    right : 0px;  
+   pointer-events: none ;
+   }

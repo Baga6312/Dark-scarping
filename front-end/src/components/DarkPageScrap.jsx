@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../assets/style_dark_web.css'
 import   Service from './service.jsx'
 
@@ -6,10 +7,15 @@ function  DarkPageScrap() {
   const [data , setData ] = useState("")
   const [input1 , setInput1 ] =  useState("")
   const service = Service()
+  const navigate = useNavigate()
     const search = () => { 
       const Data = service.searchForData() 
       // setData(Data)
       // console.log(data)
+    }
+    const menu = (e) => { 
+        e.preventDefault();
+        navigate('/home');
     }
 
   return (
@@ -19,6 +25,7 @@ function  DarkPageScrap() {
     <h1> Welcome to DarkWeb Scrapping </h1>
                 <input id="topic" placeholder="Enter topic" type="text" /><br/>
                 <div id="keyword-label">
+                  <img id="image" src='../src/assets/wp11184521-black-anime-galaxy-wallpapers.jpg'/>
                     <input 
                           id="keyword" 
                           placeholder=" Enter Keyword" 
@@ -28,6 +35,9 @@ function  DarkPageScrap() {
                     <input id="btn" type="button" value="+" />
                     <div id="site-label">
                         <button id='site' onClick={search()}><strong>Scrap</strong></button><br/>
+                    </div> 
+                    <div id="site-label">
+                        <button id='site' onClick={menu}><strong>menu</strong></button><br/>
                     </div> 
                 </div>
             </div> 

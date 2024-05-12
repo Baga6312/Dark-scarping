@@ -64,6 +64,7 @@
     margin-top : 10px;
     padding-top:  100px;
     color : white ;
+    font-size: 300%;
    }
 
    #logo p { 
@@ -83,4 +84,13 @@
    .signup-btn  { 
     font-size: small;
     font-weight: bold;
+   }
+
+   img { 
+    height : 130%; 
+    width: 100%;
+    opacity: 0.2 !important;
+    position: fixed;
+    top : -50px;
+    right : 0px;  
    }
