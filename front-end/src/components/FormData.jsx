@@ -20,7 +20,7 @@ function  FormData () {
     <div id="logo">
 		<h1 >Dark Gate</h1>
       <img id="image" src='../src/assets/wp11184521-black-anime-galaxy-wallpapers.jpg'/>
-      <p>Because you have the right to be aware </p>
+      <p>Because i have the right to do your mom </p>
         </div>
         <div id="buttons">
             <span><input className="signin-btn" type="button" value="GitHub Scrapper"  onClick={handleGithub}/></span><br/><br/>
