@@ -11,6 +11,7 @@ function App() {
       <div className="login">
         <Routes>
           <Route path="/home" element={<FormData/>}/>
+          <Route path="/" element={<FormData/>}/>
           <Route path="/Dark-Scrapping-page" element={<DarkPageScrap/>}/>
           <Route path="/Github-Scrapping-page" element={<GitHubScrapper/>}/>
         </Routes>
