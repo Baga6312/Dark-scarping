@@ -24,6 +24,11 @@
     margin-top: 180px; /* Removed the extra semicolon */
 }
 
+h1 { 
+margin-top : -50px;
+padding-bottom: 50px; 
+    color : white; 
+}
 #site-label #site { 
     
     width: 260px;

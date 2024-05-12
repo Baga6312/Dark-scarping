@@ -1,6 +1,18 @@
+import { useNavigate } from 'react-router-dom';
 import '../assets/styel_home.css'
 function  FormData () {
+
+  const navigate = useNavigate()
     
+  const handleDark = (e ) => { 
+    e.preventDefault();
+    navigate('/Dark-Scrapping-page');
+  }
+
+  const handleGithub = (e ) => { 
+    e.preventDefault();
+    navigate('/Github-Scrapping-page');
+  }
   return (
 
     <div id="body">
@@ -10,9 +22,8 @@ function  FormData () {
       <p> my gate to ur mom  </p>
         </div>
         <div id="buttons">
-            <span><input className="signin-btn" type="button" value="signin"  /></span><br/><br/>
-            <span><input className="signup-btn" type="button" value="login" /></span><br/><br/>
-            <span><input className="guest-btn" type="button" value="anonymous " /></span>
+            <span><input className="signin-btn" type="button" value="GitHub Scrapper"  onClick={handleGithub}/></span><br/><br/>
+            <span><input className="signup-btn" type="button" value="DarkWeb Scrapper" onClick={handleDark} /></span><br/><br/>
         </div>
   </div>
   </div>
