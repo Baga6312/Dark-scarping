@@ -1,5 +1,5 @@
 #body{
-    margin: 0;
+    margin: 0 ;
     padding: 0;
     height: 100vh;
     display: flex;
@@ -8,7 +8,7 @@
 }
 
 #container {
-    background-color: orange;
+    background-color: black;  
     height: 100%;
     width: 100%;
     text-align: center;
@@ -21,11 +21,12 @@
     align-items: center; /* Center horizontally */
     justify-content: center; /* Center vertically */
     margin: 100px; /* Removed the extra semicolon */
+    margin-top: 180px; /* Removed the extra semicolon */
 }
 
 #site-label #site { 
     
-    width: 230px;
+    width: 260px;
     margin: 5px;
     margin-top :25px; 
     height: 45px;
@@ -65,12 +66,15 @@
 #keyword-label {
     width: 20%;
     background-color: white;
+    padding-right: 5px; 
     height: 45px;
     border-radius: 30px;
 }
 
 #keyword-label #keyword {
     border-radius: 30px;
+    margin-right: 0px;
+    width: 150px;
     margin-top: 4px;
     text-align: center;
     border: none;
@@ -81,6 +85,8 @@
 #keyword-label #btn {
     border-radius: 30px;
     border: none;
+    margin-top : -50px ;
+    margin-right : -25px;
     list-style: none;
     background-color: white;
     cursor: pointer;
@@ -97,9 +103,6 @@
 ::placeholder {
     text-align: center;
  }
-
-
-
 
 @keyframes fadeInImg {
     from  { 

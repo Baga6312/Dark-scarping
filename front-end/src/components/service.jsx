@@ -5,10 +5,9 @@ function Service() {
 const baseurl = 'http://localhost:5001/command'
 const [data ,setData ] = useState([])
     const searchForData = async (data) => { 
-        const response = await axios.get(`${baseurl}` , {data : data })
-        setData(response.data)
-        localStorage.setItem("data" , response.data)
-        return response.data
+        // const response = await axios.get(`${baseurl}` , {info : data })
+        // setData(response.data)
+        // return response.data
     }
     const getData = () => { 
         return [
@@ -22,4 +21,4 @@ const [data ,setData ] = useState([])
 
 }
 
-export default Service ;
+export default  Service ;
