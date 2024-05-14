@@ -7,10 +7,13 @@ const PORT = process.env.port
 
 app.use(cors())
 app.get('/command' , async (req , res)=> { 
-    const data =  req.query.info.split(" ") 
-    console.log( data) 
+    const data =  req.query
+    let  s = "";
+    Object.keys(data).forEach(key => {
+        s = s + data[key]+" "
+    }); 
     // const drama = exec(`python3 scraping.py ${data[0]} ${data[1]} ${data[2]}   ` , (stderr , stdout ,err ) => { 
-    const drama = exec(`python3 scraping.py ` , (stderr , stdout ,err ) => { 
+    const drama = exec(`python3 scraping.py ${s} ` , (stderr , stdout ,err ) => { 
         if (stderr) { 
             console.log(stderr)
         }

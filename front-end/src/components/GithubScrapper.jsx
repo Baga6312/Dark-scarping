@@ -1,19 +1,32 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 import '../assets/style_dark_web.css'
 import Service from './service.jsx'
 
 function GitHubScrapper() {
-  const [data, setData] = useState("")
-  const [input1, setInput1] = useState("")
   const [divs, setDivs] = useState([]);
-  const [inputValue , setInputValue] =  useState([])
+  const [inputValue, setInputValue] = useState([{ value: '' }]); 
+  const baseurl = 'http://localhost:5001/command'
   const navigate = useNavigate()
   const service = Service()
 
-  const search = () => {
-    const Data = service.searchForData()
+  
+  const search = async () => {
+    console.log(inputValue);
+    const params = {};
+    for (let i = 0; i < inputValue.length; i++) {
+      params[`key${i}`] = inputValue[i].value;
+    }
+  
+    try {
+      const response = await axios.get(baseurl, { params });
+      console.log(response.data.message);
+    } catch (error) {
+      console.error('Error searching:', error);
+    }
   }
+  
 
   const menu = (e) => {
     e.preventDefault();
@@ -27,8 +40,7 @@ function GitHubScrapper() {
         <input 
           id='keyword-1' 
           className='keyword-class'
-          value={inputValue} 
-          onChange={(e)=> setInputValue(e.target.value)}
+          onChange={(e) => handleInputChange(prevDivs.length, e.target.value)}
           placeholder=" Enter Keyword" 
           type="text"
         />
@@ -42,6 +54,15 @@ function GitHubScrapper() {
     ]);
   };
 
+
+  const handleInputChange = (index, value) => {
+    setInputValue((prevInputValues) => {
+      const newInputValues = [...prevInputValues];
+      newInputValues[index] = { value };
+      return newInputValues;
+    });
+  };
+
   return (
     <div id="body">
       <div id="container">
@@ -52,9 +73,9 @@ function GitHubScrapper() {
             <input
               id="keyword"
               placeholder=" Enter Keyword"
+              onChange={(e)=> handleInputChange( inputValue.length -1  , e.target.value)}
               type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)} />
+            />
             <input
               id="btn"
               type="button"
@@ -62,11 +83,6 @@ function GitHubScrapper() {
               onClick={addNewDiv}
             />
           {divs}
-
-
-
-
-
 
             <div id="site-label">
               <button
