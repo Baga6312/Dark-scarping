@@ -1,14 +1,10 @@
 from requests_tor  import RequestsTor
 from bs4 import BeautifulSoup  
 
-
-
-
-
-
 request = RequestsTor(tor_ports=(9050,) , tor_cport=9051)
 
-url ="http://notevilmtxf25uw7tskqxj6njlpebyrmlrerfv5hc4tuq7c7hilbyiqd.onion"
+url ="http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion"
+
 keyword ="actia"
 
 
@@ -21,17 +17,19 @@ def SCRAP_AHMIA (url , keyword) :
         online_link.append(site.get_text())
     
     for link in online_link : 
-        rq = request.get("http://" +link)
-        if rq == "<Response [200]>" : 
-            soup = BeautifulSoup(rq.text, 'html.parser')
-            keyword = soup.find(keyword)
+        print (link)
+        rq1 = request.get("http://" +link)
+
+        if str(rq1) == "<Response [200]>" : 
+            soup = BeautifulSoup(rq1.text, 'html.parser')
+            keyword_occ = soup.find(keyword)
     
-            if keyword : 
-                return keyword + " found in " + link
+            if keyword_occ  : 
+                print (keyword + " found in " + link)
             else : 
-                return "not found "
+                print ("not found ")
     
-        elif rq != "<Response [200]>" : 
+        elif str(rq1) == "<Response [200]>" : 
             print ("site is unreacheable")
 
 
@@ -45,11 +43,4 @@ def SCRAP_RELATE_LIST (url , keyword) :
     else : 
         return "found in relateList"
 
-
-
-# riglha mbaad ki yet7al 
-def SCRAP_NOT_EVIL(url , keyword) : 
-
-    rq = request.get(url) 
-    soup = BeautifulSoup(rq.text , 'html.parser')
-    print (soup)
+SCRAP_AHMIA(url, keyword )
