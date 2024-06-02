@@ -14,7 +14,7 @@ def collect_sites (filename) :
     for line in lines : 
         arr += (line.split(';'))
     return arr 
-
+# TODO : add methods here 
 # scraping every specific site with its own scrapuing methode 
 def selective_scrap (onion_name , onion_url) : 
     match onion_name : 
