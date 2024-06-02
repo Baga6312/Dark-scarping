@@ -25,7 +25,7 @@
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Baga6312/dark-scarping ~./DarkScrapping 
+git clone https://github.com/Baga6312/dark-scarping /DarkScrapping 
 ```
 
 ## Usage
