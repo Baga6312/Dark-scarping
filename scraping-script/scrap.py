@@ -5,7 +5,7 @@ request = RequestsTor(tor_ports=(9050,) , tor_cport=9051)
 
 keyword = "esprit"
 
-def SCRAP_ALL (url , key , tag , className , afterLink) :  
+def SCRAP_ALL (siteName, url , key , tag , className , afterLink) :  
 
     try : 
         found_not_found = "not found"        
@@ -17,7 +17,6 @@ def SCRAP_ALL (url , key , tag , className , afterLink) :
 
         for sip in soup : 
 
-            # print((sip.get_tet().lower()).split())
             if keyword in ((sip.get_text().lower()).split()) : 
                 found_not_found = "found"
                 break
@@ -25,7 +24,7 @@ def SCRAP_ALL (url , key , tag , className , afterLink) :
                 pass 
 
 
-        print(found_not_found )
+        print(found_not_found + " in " + siteName)
 
     except Exception : 
         print ("site is unavailble")
@@ -44,3 +43,4 @@ def SCRAP_ALL (url , key , tag , className , afterLink) :
 # SCRAP_ALL("oniwayztpfv4wpawasbc7cavzjdvb3dwwtlizumjvcu7y3tqqic7dxqd.onion" , "actia" , "p" , "desc" , "/search.php?s=")
 #SCRAP_ALL("orealmvo7j6kfixcz7x3yjmlc2szw3j3qugcfuwas2trtnt6mbp7v2ad.onion" , "" , "a" , "" , "/search?query="+keyword+"&action=search")
 # SCRAP_ALL("darksidthvquha52o4fzvtap4ticaoh4sboobywadzkvcbjzhtapadyd.onion" , "actia" , "td" , "" , "/?k=")
+
