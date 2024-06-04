@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 request = RequestsTor(tor_ports=(9050,) , tor_cport=9051)
 
-url =""
+url ="haystak2wfqmtftctncw7hj6p6glevgffy5b7uios7fypaocbucmehad.onion"
 
 keyword ="actia"
 
@@ -105,7 +105,7 @@ def SCRAP_DARK_LEAK_MARKET (url , keyword ) :
     try : 
         rq = request.get("http://"+url)
         soup = BeautifulSoup(rq.text , 'html.parser').find_all("a" , href=True)   
-    
+
         for sip in soup : 
             souper = sip.get_text()
             if keyword not in souper.split(" ") :
@@ -120,4 +120,25 @@ def SCRAP_DARK_LEAK_MARKET (url , keyword ) :
         print('site is unreachable')
     print(found_not_found)
 
-SCRAP_DARK_LEAK_MARKET(url , keyword)
+         
+         
+        #######################
+        ##                   ##
+        ##  Hidden_Answer    ##
+        ##                   ##
+        #######################
+
+def SCRAP_HAYSTAK(url , keyword  ) :
+
+    try : 
+        rq = request.get("http://"+url+"?q="+keyword)
+        soup = BeautifulSoup(rq.text , 'html.parser').find_all("div" ,class_="result")
+
+        if soup : 
+            print ("found")
+        else : 
+            print ("not found")
+
+    except Exception : 
+        print("site is unreachable")
+
