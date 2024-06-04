@@ -1,40 +1,33 @@
 # Dark Scraping 
 
-### A simple web Scrapping application for scrapping the dark web for breached credential 
+### A simple web Scrapping script for scrapping the dark web for breached credential
 
-## Table of Contents
-
-- [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Usage](#usage)
-
-## Features
-
-- User-friendly interface
-
-## Prerequisites
-
-### Before you begin, ensure you have the following installed:
-
-- [Node.js](https://nodejs.org/)
-- [Tor](https://www.torproject.org/)
-- [Python3](https://www.python.org/)
 
 ## Installation
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Baga6312/dark-scarping /DarkScrapping 
+git clone https://github.com/Baga6312/dark-scarping 
 ```
 
 ## Usage
 
-### For setting up everything and running the server with
+
+#### Before you begin, ensure you have the right permessions for the ```configure.sh``` script  :
+
+```
+chmod +x configure.sh 
+```
+### For setting up everything 
  
 ```
-npm run dev
+./configure.sh
+
 ```
 
-### and wait a moment 
+### for script usage 
+```
+python3 DarkScrappy.py <key_word>
+```
 
