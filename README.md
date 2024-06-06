@@ -28,6 +28,6 @@ chmod +x configure.sh
 
 ### for script usage 
 ```
-python3 DarkScrappy.py <key_word>
+python3 DarkScrappy.py <key_words>
 ```
 
