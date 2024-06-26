@@ -30,6 +30,9 @@ def SCRAP_ALL (siteName, url , key , tag , className , afterLink) :
         print ("site is unavailble")
     
 
+# TODO
+# do ur fking testing 
+
 # SCRAP_ALL("juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion" , "actia" , "li" , "result" , "/search/?q=" )
 # SCRAP_ALL("darkleakyqmv62eweqwy4dnhaijg4m4dkburo73pzuqfdumcntqdokyd.onion" , "" , "strong" , "" , "" )
 # SCRAP_ALL("haystak2wfqmtftctncw7hj6p6glevgffy5b7uios7fypaocbucmehad.onion" , "actia" , "a" , "" , "/?q=" )
