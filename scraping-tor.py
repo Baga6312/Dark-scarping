@@ -1,83 +1,76 @@
 import threading
-
-from requests_tor  import RequestsTor
+from requests_tor import RequestsTor
 from bs4 import BeautifulSoup  
 from testing import SCRAP_ALL 
 
-request = RequestsTor(tor_ports=(9050,) , tor_cport=9051)
-filename="data_leaks_sites.txt"
+request = RequestsTor(tor_ports=(9050,), tor_cport=9051)
+filename = "data_leaks_sites.txt"
 
-# getting onion sites from an external file 
-def collect_sites (filename) : 
+def collect_sites(filename):
     arr = []
-    with open(filename , 'r') as file : 
+    with open(filename, 'r') as file:
         lines = file.readlines()
-
-    for line in lines : 
+    for line in lines:
         arr += (line.split(';'))
     return arr 
 
+def scrape_ahmia(url):
+    t = threading.Thread(target=SCRAP_ALL, args=("AHMIA", url, "keyword", "li", "result", "/search/?q="))
+    t.start()
+    t.join()
 
-# TODO : add methods here 
-# scraping every specific site with its own scrapuing methode 
-def selective_scrap (onion_name , onion_url) : 
-    match onion_name : 
-        case 'AHMIA' : 
-            t = threading.Thread(target=SCRAP_ALL , )
-            t = start()
-            t = join()
-            return 
-        case 'RelateList' : 
-            t = threading.Thread(target=SCRAP_ALL , )
-            t = start()
-            t = join()
-            return 
-        case 'Breached_Forum' : 
-            t = threading.Thread(target=SCRAP_ALL , )
-            t = start()
-            t = join()
-            return 
-        case 'Dar_Leak_Market' : 
-            t = threading.Thread(target=SCRAP_ALL , )
-            t = start()
-            t = join()
-            return 
-        case 'DeepPaste_V3' : 
-            t = threading.Thread(target=SCRAP_ALL , )
-            t = start()
-            t = join()
-            return 
-        case 'Snatch' : 
-            t = threading.Thread(target=SCRAP_ALL , )
-            t = start()
-            t = join()
-            return 
-        case 'RansomEXX': 
-            t = threading.Thread(target=SCRAP_ALL , )
-            t = start()
-            t = join()
-            return ; 
-        case 'Ragnar_Locker': 
-            t = threading.Thread(target=SCRAP_ALL , )
-            t = start()
-            t = join()
-            return ; 
-        case 'Quantum_Blog': 
-            t = threading.Thread(target=SCRAP_ALL , )
-            t = start()
-            t = join()
-            return ; 
-        case 'Hive_Leaks': 
-            t = threading.Thread(target=SCRAP_ALL , )
-            t = start()
-            t = join()
-            return ; 
-        case 'AvosLocker': 
-            t = threading.Thread(target=SCRAP_ALL , )
-            t = start()
-            t = join()
-            return ; 
-        case _ : 
-            return 'No website to scrap'; 
+def scrape_relatelist(url):
+    t = threading.Thread(target=SCRAP_ALL, args=("RelateList", url, "keyword", "a", "", "/"))
+    t.start()
+    t.join()
 
+def selective_scrap(onion_name, onion_url):
+    match onion_name:
+        case 'AHMIA':
+            scrape_ahmia(onion_url)
+        case 'RelateList':
+            scrape_relatelist(onion_url)
+        case 'Breached_Forum':
+            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "p", "desc", "/search.php?s="))
+            t.start()
+            t.join()
+        case 'Dar_Leak_Market':
+            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "td", "", "/?k="))
+            t.start()
+            t.join()
+        case 'DeepPaste_V3':
+            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "p", "text-truncate", "/search/"))
+            t.start()
+            t.join()
+        case 'Snatch':
+            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "a", "", "/search?query="))
+            t.start()
+            t.join()
+        case 'RansomEXX':
+            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "div", "post", "/search?q="))
+            t.start()
+            t.join()
+        case 'Ragnar_Locker':
+            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "div", "post-content", "/search?q="))
+            t.start()
+            t.join()
+        case 'Quantum_Blog':
+            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "article", "post", "/?s="))
+            t.start()
+            t.join()
+        case 'Hive_Leaks':
+            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "div", "entry-content", "/?s="))
+            t.start()
+            t.join()
+        case 'AvosLocker':
+            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "div", "post-content", "/search?q="))
+            t.start()
+            t.join()
+        case _:
+            return 'No website to scrap'
 
+if __name__ == "__main__":
+    sites = collect_sites(filename)
+    for site in sites:
+        onion_name, onion_url = site.split('=')
+        selective_scrap(onion_name.strip(), onion_url.strip())
