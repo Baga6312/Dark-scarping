@@ -67,5 +67,8 @@ install_requirement() {
             ;; esac 
     fi 
     # install requiremennts 
-    pip install -r requirements.txt --break-systemù-packages  
+    pip install -r requirements.txt --break-systemù-packages 
+
+    # wait for the installation till it ends
+    wait  
 }

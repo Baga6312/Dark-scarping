@@ -1,7 +1,6 @@
 import threading
 from requests_tor import RequestsTor
-from bs4 import BeautifulSoup  
-from testing import SCRAP_ALL 
+from scrap import SCRAP_ALL 
 
 request = RequestsTor(tor_ports=(9050,), tor_cport=9051)
 filename = "data_leaks_sites.txt"
