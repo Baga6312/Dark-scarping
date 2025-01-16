@@ -20,7 +20,6 @@ git clone https://github.com/Baga6312/dark-scarping
 chmod +x configure.sh 
 ```
 ### For setting up everything 
- 
 ```
 ./configure.sh
 
