@@ -1,0 +1,2 @@
+bs4
+requests_tor==1.4

@@ -1,75 +1,65 @@
-import threading
-from requests_tor import RequestsTor
+# scraping_tor.py
+import time
+import requests
+import os
+from tor_utils import get_tor_session, renew_tor_circuit
 from scrap import SCRAP_ALL 
-
-request = RequestsTor(tor_ports=(9050,), tor_cport=9051)
-filename = "data_leaks_sites.txt"
 
 def collect_sites(filename):
     arr = []
-    with open(filename, 'r') as file:
-        lines = file.readlines()
-    for line in lines:
-        arr += (line.split(';'))
-    return arr 
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                line = line.strip()
+                if line:  # Skip empty lines
+                    arr.append(line)
+    except FileNotFoundError:
+        print(f"Error: File {filename} not found")
+    return arr
 
-def scrape_ahmia(url):
-    t = threading.Thread(target=SCRAP_ALL, args=("AHMIA", url, "keyword", "li", "result", "/search/?q="))
-    t.start()
-    t.join()
-
-def scrape_relatelist(url):
-    t = threading.Thread(target=SCRAP_ALL, args=("RelateList", url, "keyword", "a", "", "/"))
-    t.start()
-    t.join()
-
-def selective_scrap(onion_name, onion_url):
-    match onion_name:
-        case 'AHMIA':
-            scrape_ahmia(onion_url)
-        case 'RelateList':
-            scrape_relatelist(onion_url)
-        case 'Breached_Forum':
-            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "p", "desc", "/search.php?s="))
-            t.start()
-            t.join()
-        case 'Dar_Leak_Market':
-            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "td", "", "/?k="))
-            t.start()
-            t.join()
-        case 'DeepPaste_V3':
-            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "p", "text-truncate", "/search/"))
-            t.start()
-            t.join()
-        case 'Snatch':
-            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "a", "", "/search?query="))
-            t.start()
-            t.join()
-        case 'RansomEXX':
-            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "div", "post", "/search?q="))
-            t.start()
-            t.join()
-        case 'Ragnar_Locker':
-            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "div", "post-content", "/search?q="))
-            t.start()
-            t.join()
-        case 'Quantum_Blog':
-            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "article", "post", "/?s="))
-            t.start()
-            t.join()
-        case 'Hive_Leaks':
-            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "div", "entry-content", "/?s="))
-            t.start()
-            t.join()
-        case 'AvosLocker':
-            t = threading.Thread(target=SCRAP_ALL, args=(onion_name, onion_url, "keyword", "div", "post-content", "/search?q="))
-            t.start()
-            t.join()
-        case _:
-            return 'No website to scrap'
+def selective_scrap(onion_name, onion_url, keyword):
+    try:
+        # Define endpoint
+        if onion_name == "AHMIA":
+            end_point = "/search/?q={keyword}"
+        elif onion_name == "RelateList":
+            end_point = "/search?query={keyword}"
+        elif onion_name == "RansomEXX":
+            end_point = "/search?q={keyword}"
+        elif onion_name == "Dark_Leak_Market":
+            end_point = "/search?term={keyword}"
+        elif onion_name == "hayStak":
+            end_point = "/search?q={keyword}"
+        elif onion_name == "Torch":
+            end_point = "/search?query={keyword}"
+        elif onion_name == "EXCAVATOR":
+            end_point = "/search?q={keyword}"
+        elif onion_name == "OnionWay":
+            end_point = "/search?q={keyword}"
+        elif onion_name == "ouRealm":
+            end_point = "/search?term={keyword}"
+        elif onion_name == "Dark_Side":
+            end_point = "/search?q={keyword}"
+        else:
+            end_point = "/search?q={keyword}"
+        
+        # Call the SCRAP_ALL function
+        SCRAP_ALL(onion_name, onion_url, end_point, keyword)
+        
+    except Exception as e:
+        print(f"Error in selective_scrap: {str(e)}")
 
 if __name__ == "__main__":
+    filename = "data_leaks_sites.txt"
     sites = collect_sites(filename)
     for site in sites:
-        onion_name, onion_url = site.split('=')
-        selective_scrap(onion_name.strip(), onion_url.strip())
+        if '=' in site:
+            parts = site.split('=', 1)
+        elif ';' in site:
+            parts = site.split(';', 1)
+        else:
+            continue
+            
+        if len(parts) == 2:
+            onion_name, url = parts
+            selective_scrap(onion_name.strip(), url.strip(), "test")
